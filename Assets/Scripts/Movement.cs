@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] float rocketThrust = 1.0f;
-    [SerializeField] float rotationThrust = 1.0f;
+    [SerializeField] float rocketThrust = 1f;
+    [SerializeField] float rotationThrust = 1f;
     Rigidbody rb;
     
     // Start is called before the first frame update
@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
         {
             ApplyRotation(rotationThrust);
         }
-        else if (Input.GetKey(KeyCode.D)) // This one gets the else if because we're ok if you're boosting and pressing left, but you can't be going left and right at the same time.
+        else if (Input.GetKey(KeyCode.D)) // This one gets the 'else if' because we're ok if you're boosting and pressing left, but you can't be going left and right at the same time.
         {
             ApplyRotation(-rotationThrust);
         }
