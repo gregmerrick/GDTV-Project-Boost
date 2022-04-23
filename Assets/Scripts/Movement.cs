@@ -7,11 +7,13 @@ public class Movement : MonoBehaviour
     [SerializeField] float rocketThrust = 1f;
     [SerializeField] float rotationThrust = 1f;
     Rigidbody rb;
+    AudioSource audioSource;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,6 +28,14 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             rb.AddRelativeForce(Vector3.up * rocketThrust * Time.deltaTime); // Vector3 calculates direction and magnitude (speed and direction). Vector3.up is shorthand for 0,1,0. Relative force is relative to object not game world. **It wasn't flying because MASS was too heavy!!**  
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play(); // Play that funky music white boy.
+            }
+        }
+        else
+        {
+            audioSource.Stop();
         }
     }
 
