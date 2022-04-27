@@ -8,6 +8,10 @@ public class Movement : MonoBehaviour
     [SerializeField] float rotationThrust = 1f;
     [SerializeField] AudioClip mainEngine;
 
+    [SerializeField] ParticleSystem mainBooster;
+    [SerializeField] ParticleSystem leftBooster;
+    [SerializeField] ParticleSystem rightBooster;
+
     Rigidbody rb;
     AudioSource audioSource;
     
@@ -34,10 +38,15 @@ public class Movement : MonoBehaviour
             {
                 audioSource.PlayOneShot(mainEngine); // Play that funky music white boy.
             }
+            if (!mainBooster.isPlaying)
+            {
+                mainBooster.Play();
+            }
         }
         else
         {
             audioSource.Stop();
+            mainBooster.Stop();
         }
     }
 
@@ -46,10 +55,23 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             ApplyRotation(rotationThrust);
+            if (!rightBooster.isPlaying) // It's around the other way because of rotation (going counter-clockwise).
+            {
+                rightBooster.Play();
+            }
         }
         else if (Input.GetKey(KeyCode.D)) // This one gets the 'else if' because we're ok if you're boosting and pressing left, but you can't be going left and right at the same time.
         {
             ApplyRotation(-rotationThrust);
+            if (!leftBooster.isPlaying)
+            {
+                leftBooster.Play();
+            }
+        }
+        else
+        {
+            rightBooster.Stop();
+            leftBooster.Stop();
         }
     }
 
