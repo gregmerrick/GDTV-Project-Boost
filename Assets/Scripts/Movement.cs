@@ -33,20 +33,11 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddRelativeForce(Vector3.up * rocketThrust * Time.deltaTime); // Vector3 calculates direction and magnitude (speed and direction). Vector3.up is shorthand for 0,1,0. Relative force is relative to object not game world. **It wasn't flying because MASS was too heavy!!**  
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(mainEngine); // Play that funky music white boy.
-            }
-            if (!mainBooster.isPlaying)
-            {
-                mainBooster.Play();
-            }
+            StartThrusting();
         }
         else
         {
-            audioSource.Stop();
-            mainBooster.Stop();
+            StopThrusting();
         }
     }
 
@@ -54,25 +45,59 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            ApplyRotation(rotationThrust);
-            if (!rightBooster.isPlaying) // It's around the other way because of rotation (going counter-clockwise).
-            {
-                rightBooster.Play();
-            }
+            RotateLeft();
         }
         else if (Input.GetKey(KeyCode.D)) // This one gets the 'else if' because we're ok if you're boosting and pressing left, but you can't be going left and right at the same time.
         {
-            ApplyRotation(-rotationThrust);
-            if (!leftBooster.isPlaying)
-            {
-                leftBooster.Play();
-            }
+            RotateRight();
         }
         else
         {
-            rightBooster.Stop();
-            leftBooster.Stop();
+            StopRotating();
         }
+    }
+
+    void StartThrusting()
+    {
+        rb.AddRelativeForce(Vector3.up * rocketThrust * Time.deltaTime); // Vector3 calculates direction and magnitude (speed and direction). Vector3.up is shorthand for 0,1,0. Relative force is relative to object not game world. **It wasn't flying because MASS was too heavy!!**  
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine); // Play that funky music white boy.
+        }
+        if (!mainBooster.isPlaying)
+        {
+            mainBooster.Play();
+        }
+    }
+
+    void StopThrusting()
+    {
+        audioSource.Stop();
+        mainBooster.Stop();
+    }
+
+    void RotateLeft()
+    {
+        ApplyRotation(rotationThrust);
+        if (!rightBooster.isPlaying) // It's around the other way because of rotation (going counter-clockwise).
+        {
+            rightBooster.Play();
+        }
+    }
+
+    void RotateRight()
+    {
+        ApplyRotation(-rotationThrust);
+        if (!leftBooster.isPlaying)
+        {
+            leftBooster.Play();
+        }
+    }
+
+    void StopRotating()
+    {
+        rightBooster.Stop();
+        leftBooster.Stop();
     }
 
     void ApplyRotation(float rotationThisFrame) // We added this parameter so we can handle the positive and negative numbers to change direction on Z axis.
