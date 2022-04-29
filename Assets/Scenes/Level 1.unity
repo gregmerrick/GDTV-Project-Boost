@@ -308,6 +308,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 434894295823619532, guid: 0f6d887069cc80246b131ebb44553393, type: 3}
+      propertyPath: movementFactor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434894295823619532, guid: 0f6d887069cc80246b131ebb44553393, type: 3}
+      propertyPath: movementVector.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434894295823619532, guid: 0f6d887069cc80246b131ebb44553393, type: 3}
+      propertyPath: movementVector.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 434894296164190907, guid: 0f6d887069cc80246b131ebb44553393, type: 3}
       propertyPath: m_Name
       value: Obstacle
@@ -322,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434894296164190911, guid: 0f6d887069cc80246b131ebb44553393, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.31
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 434894296164190911, guid: 0f6d887069cc80246b131ebb44553393, type: 3}
       propertyPath: m_LocalPosition.z
